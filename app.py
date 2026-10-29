@@ -71,14 +71,14 @@ if saved:
              tiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
              attr="© OpenStreetMap contributors © CARTO",
          )
-        folium.Marker(centre, popup=place_name, icon=folium.Icon(color="blue")).add_to(m)
-        for _, row in res.iterrows():
-            color = "green" if row["fee"] == "no" else "red" if row["fee"] == "yes" else "gray"
-            folium.CircleMarker(
-                location=[row["lat"], row["lon"]], radius=8, color=color, fill=True,
-                popup=f"{row['name']}<br>Fee: {row['fee']}<br>{row['distance_m']} m away",
+             folium.Marker(centre, popup=place_name, icon=folium.Icon(color="blue")).add_to(m)
+             for _, row in res.iterrows():
+                    color = "green" if row["fee"] == "no" else "red" if row["fee"] == "yes" else "gray"
+                    folium.CircleMarker(
+                   location=[row["lat"], row["lon"]], radius=8, color=color, fill=True,
+                   popup=f"{row['name']}<br>Fee: {row['fee']}<br>{row['distance_m']} m away",
             ).add_to(m)
-        st_folium(m, width=700, height=450, returned_objects=[], key="parking_map")
+st_folium(m, width=700, height=450, returned_objects=[], key="parking_map")
         st.dataframe(res[["name", "fee", "type", "distance_m", "walk_min"]])
 
 st.caption(
