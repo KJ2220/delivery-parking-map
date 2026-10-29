@@ -65,7 +65,12 @@ if saved:
     if res.empty:
         st.info("No matching places. Many places have no fee information in the data.")
     else:
-        m = folium.Map(location=centre, zoom_start=16, tiles="CartoDB positron")
+m = folium.Map(
+    location=centre,
+    zoom_start=16,
+    tiles="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+    attr="© OpenStreetMap contributors © CARTO",
+)
         folium.Marker(centre, popup=place_name, icon=folium.Icon(color="blue")).add_to(m)
         for _, row in res.iterrows():
             color = "green" if row["fee"] == "no" else "red" if row["fee"] == "yes" else "gray"
